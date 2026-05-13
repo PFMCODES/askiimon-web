@@ -1,33 +1,33 @@
 import brain from "./brain.js";
-import { err, setErr, setShowWarnings, showWarnings } from "./util.js";
+import { err, setParent } from "./util.js"
 
-function birth(parameter) {
-    if (typeof parameter !== "object" && showWarnings()) {
-        setErr(true);
-        err(`init() expects a config object, but received a ${typeof parameter}.`, "init");''
-        process.exit(1);
+async function birth(object) {
+    const ot = typeof object;
+    if (ot !== "object") {
+        err(`function birth expected an object received a ${ot}`, "init");
+        return;
     }
-    if (Object.keys(parameter).length === 0 && showWarnings()) {
-        setErr(true);
-        err(`init() expects a config object, but object does contain necessary data.`, "init");
-        process.exit(1);
+    if (object.length === 0) {
+        err("function birth received an empty Object", "init");
+        return;
     }
-    const mood = parameter.mood;
-    const message = parameter.message;
+    if (typeof object.parent !== "string") {
+        err("function birth received did not receive an string of parent id", "init");
+    }
+
+    const parent  = object.parent;
+    console.log({parent})
+    const mood = object.mood || "idle";
+    const message = object.message || "";
+    await setParent(parent);
     brain.init(message, mood);
-
     return brain;
 }
 
-const create = birth;
-const init = birth;
-
-const askiimon = {
+let askiimon = {
     birth,
-    create,
-    init,
-    setShowWarnings
-};
+    init: birth,
+    create: birth
+}
 
-export { birth, init, create };
 export default askiimon;

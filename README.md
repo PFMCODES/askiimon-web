@@ -1,9 +1,9 @@
 <img src="https://pfmcodes.onrender.com/askiimon/logo%20with%20text.svg">
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-4000ff.svg?style=flat-square)](https://github.com/pfmcodes/askiimon/LICENSE)
-[![Downloads](https://img.shields.io/npm/dw/askiimon?style=flat-square)](https://npmjs.com/askiimon)
-[![Version](https://img.shields.io/npm/v/askiimon?style=flat-square)](https://npmjs.com/askiimon)
-[![Documentation](https://raw.githubusercontent.com/PFMCODES/askiimon/refs/heads/main/docs.svg)](https://pfmcodes.onrender.com/askiimon/docs/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-4000ff.svg?style=flat-square)](https://github.com/pfmcodes/askiimon-web/LICENSE)
+[![Downloads](https://img.shields.io/npm/dw/askiimon-web?style=flat-square)](https://npmjs.com/askiimon-web)
+[![Version](https://img.shields.io/npm/v/askiimon-web?style=flat-square)](https://npmjs.com/askiimon-web)
+[![Documentation](https://raw.githubusercontent.com/PFMCODES/askiimon/refs/heads/main/docs.svg)](https://pfmcodes.onrender.com/askiimon-web/docs/)
 
 A tiny terminal personality that reacts, talks, and lives inside your app.
 
@@ -39,11 +39,12 @@ ASKIIMON is a lightweight JavaScript library that gives your CLI or app a living
 
   1.0.0:
   ```javascript
-  import askiimon from "askiimon";
+  import askiimon from "askiimon-web";
 
   const mon = askiimon.init({
     mood: "idle",
     message: "",
+    parent: "parent" // just pass the id of parent element
   });
 
   let timeOut = setTimeout(() => {
@@ -58,11 +59,12 @@ ASKIIMON is a lightweight JavaScript library that gives your CLI or app a living
 
   2.0.0(and onwards):
   ```javascript
-  import askiimon from "askiimon";
+  import askiimon from "askiimon-web";
 
   const mon = askiimon.init({
     mood: "idle",
     message: "",
+    parent: "parent" // just pass the id of parent element
   });
 
   mon.setMood("happy");
@@ -82,9 +84,13 @@ ASKIIMON is a lightweight JavaScript library that gives your CLI or app a living
 ## Example
 
 ```javascript
-import askiimon from "askiimon";
+import askiimon from "askiimon-web";
 
-const goblin = askiimon.birth("happy", "hello");
+const goblin = askiimon.birth({
+  mood: "happy",
+  "hi"
+  parent: "parent" // just pass the id of parent element
+});
 
 goblin.setMood("angry");
 goblin.setMessage("why did you do that?");
@@ -142,5 +148,5 @@ Actively being developed. Expect improvements and new features over time.
 ## Installation
 
 ```bash
-npm install askiimon
+npm install askiimon-web
 ```

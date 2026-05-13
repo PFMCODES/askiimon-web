@@ -1,68 +1,69 @@
-import chalk from "chalk"
+    window.askiimon = {};
+    window.askiimon["parent"] = "";
+    let warns = true;
+    let intervals = true;
+    let interval = 2000;
 
-let error = false;
-let warns = true;
-let intervals = true;
-let interval = 2000;
-
-function info(str) {
-    console.log(chalk.blueBright("ⓘ ASKIIMON: ") + str)
-}
-
-function warn(str, topic) {
-    console.log(chalk.yellow('⚠  ASKIIMON: ') + str + `\n\n${link("Docs/Help", `https://pfmcodes.onrender.com/askiimon/docs/${topic}/`)}\n`)
-}
-
-function err(str, topic) {
-    error = true;
-    process.stdout.write("\r");       // go to start
-    process.stdout.clearLine(0);      // clear line
-    console.log(chalk.redBright("╳ ASKIIMON: ") + str + `\n\n${link("Docs/Help", `https://pfmcodes.onrender.com/askiimon/docs/${topic}.html`)}\nFound a bug or an issue? ${link("report", "https://github.com/pfmcodes/askiimon/issues/new")}\n`)
-}
-
-function setErr(value) {
-    error = value;
-}
-
-function Error() {
-    return error;
-}
-
-function setShowWarnings(value) {
-    if (typeof value !== "boolean") {
-        err("setShowWarnings received a paramter of not boolean", "setShowWarnings");
-        process.exit(1);
+    export function color(c, text) {
+        return `<span class='askiimon-${c}'>${text}</span>`
     }
-    warns = value;
-}
 
-function showWarnings() {
-    return warns;
-}
-
-export function setIntervals(boolean, interval_timing) {
-    if (typeof boolean !== "boolean") {
-        err("setIntervals received paramter 1 of not boolean", "setIntervals");
-        process.exit(1);
+    export function Color(c, text) {
+        return `<span class='askiimon-customColor' style="color: ${c}">${text}</span>`
     }
-    if (typeof interval_timing !== "number") {
-        err("setIntervals received paramter 2 of not number", "setIntervals");
-        process.exit(1);
+
+    export function err(text, topic) {
+        console.error(`ASKIIMON: ${text}\nDocs/help:\n    https://pfmcodes/aksiimon-web/docs/${topic}\nFound a bug or issue? report here:\n   https://github.com/pfmcodes/askiimon-web/issues/new`);
     }
-    intervals = boolean;
-    interval = interval_timing;
-}
 
-export function Intervals() {
-    return intervals;
-}
+    export function warn(text, topic) {
+        console.warn(`ASKIIMON: ${text}\nDocs/help:\n    https://pfmcodes/aksiimon-web/docs/${topic}\nFound a bug or issue? report here:\n   https://github.com/pfmcodes/askiimon-web/issues/new`);
+    }
 
-export function Interval() {
-    return interval;
-}
+    export function info(text) {
+        console.log(
+            `%cⓘ ASKIIMON: ${text}`, 
+            'background: #3083ff; color: white; font-size: 14px; padding: 8px 8px; font-weight: 400;'
+        );
+    }
 
-function link(text, url) {
-  return `\u001b]8;;${url}\u0007${text}\u001b]8;;\u0007`;
-}
+    export function setParent(el) {
+        window.askiimon["parent"] = document.querySelector(`#${el}`);
+    }
 
-export { warn, info, err, link, setErr, Error, showWarnings, setShowWarnings };
+    export function getParent() {
+        return window.askiimon['parent'];
+    }
+
+    export function setShowWarnings(value) {
+        if (typeof value !== "boolean") {
+            err("setShowWarnings received a paramter of not boolean", "setShowWarnings");
+            return;
+        }
+        warns = value;
+    }
+
+    export function showWarnings() {
+        return warns;
+    }
+
+    export function setIntervals(boolean, interval_timing) {
+        if (typeof boolean !== "boolean") {
+            err("setIntervals received paramter 1 of not boolean", "setIntervals");
+            return;
+        }
+        if (typeof interval_timing !== "number") {
+            err("setIntervals received paramter 2 of not number", "setIntervals");
+            return;
+        }
+        intervals = boolean;
+        interval = interval_timing;
+    }
+
+    export function Intervals() {
+        return intervals;
+    }
+
+    export function Interval() {
+        return interval;
+    }

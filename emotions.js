@@ -1,5 +1,4 @@
-import chalk from "chalk";
-import { warn, info, showWarnings} from "./util.js";
+import { warn, info, showWarnings, color} from "./util.js";
 
 export const moods = {
     ADMIRATION: "*_*",
@@ -72,24 +71,24 @@ export const moods = {
 
 export let currentMood = moods["IDLE"]
 
-    export function setMood(mood) {
-        const face = moods[mood];
+export function setMood(mood) {
+    const face = moods[mood];
 
-        if (!face) {
-            if (showWarnings()) {
-                warn(chalk.whiteBright(`"${chalk.cyanBright(mood)}" does not exist. Falling back to ${chalk.yellowBright("IDLE")}.`), "valid-moods");
-                info(`use learnMood("${mood}", "...") to register it`);
-            }
-
-            currentMood = moods.IDLE;
-            notify();
-            return currentMood;
+    if (!face) {
+        if (showWarnings()) {
+            warn(color("white", `"${color("cyanBright", mood)}" does not exist. Falling back to ${color("yellowBright","IDLE")}.`), "valid-moods");
+            info(`use learnMood("${mood}", "...") to register it`);
         }
 
-        currentMood = face;
+        currentMood = moods.IDLE;
         notify();
         return currentMood;
     }
+
+    currentMood = face;
+    notify();
+    return currentMood;
+}
 
 export function learnMood(moodName, mood) {
     if (moods[moodName]) {

@@ -1,10 +1,5 @@
-emotions.txt
-feature.txt
 package-lock.json
 package.json
 node_modules
-documentation.md
+test.html
 .npmignore
-documentation.md
-tasks.txt
-test.js
